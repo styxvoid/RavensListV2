@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cadastroBtn.forEach(btn => {
         if (btn.textContent.trim() === 'Cadastro') {
             btn.addEventListener('click', function() {
-                alert('🦇 Abandonai toda esperança vós que entrai');
+                alert('🦇 "Abandonai toda esperança vós que entrai"\n\n- Dante Allighieri.');
                 // window.location.href = 'cadastro.html';
             });
         }

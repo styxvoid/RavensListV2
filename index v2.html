@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/cross fate.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Raven's List</title>
+
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+    <div class="logo">
+        <a href="#top">
+            <img src="images/ravens_list.png" alt="The Raven's List">
+        </a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="eventos.html">Eventos</a>
+        <button class="btn btn-login">Login</button>
+        <button class="btn">Cadastro</button>
+    </div>
+</nav>
+
+
+    <!-- Header -->
+    <header>
+        <img src="images/banner ravens list.png" alt="The Raven's List Banner" class="banner-image">
+    </header>
+
+<!-- Events Section -->
+    <section class="events-section" id="eventos">
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <div class="event-image">🦇</div>
+                <h3 class="event-title">Noite dos Vampiros</h3>
+                <p class="event-date">📅 25 de Novembro, 2025 - 22:00</p>
+                <p class="event-location">📍 Catacumbas Club - São Paulo</p>
+                <p class="event-description">
+                    Uma noite imersiva no universo vampírico com DJs góticos internacionais, performances teatrais e decoração macabra. Dress code: apenas preto e vermelho.
+                </p>
+                <button class="btn-buy">Comprar Ingresso</button>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="event-image">💀</div>
+                <h3 class="event-title">Festival das Almas</h3>
+                <p class="event-date">📅 13 de Dezembro, 2025 - 20:00</p>
+                <p class="event-location">📍 Cemitério do Rock - Rio de Janeiro</p>
+                <p class="event-description">
+                    Celebração gótica com bandas de darkwave, metal sinfônico e performances de dança macabra. Uma experiência inesquecível entre lápides e neblina.
+                </p>
+                <button class="btn-buy">Comprar Ingresso</button>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+                <div class="event-image">🕷️</div>
+                <h3 class="event-title">Baile das Sombras</h3>
+                <p class="event-date">📅 31 de Dezembro, 2025 - 23:00</p>
+                <p class="event-location">📍 Mansão Obscura - Curitiba</p>
+                <p class="event-description">
+                    Réveillon gótico em mansão vitoriana com música dark, bar temático e queima de fogos em vermelho e preto. Entrada apenas com traje gótico completo.
+                </p>
+                <button class="btn-buy">Comprar Ingresso</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>&copy; 2025 Raven's List.</p>
+                <a href="https://github.com/styxvoid">Github Elemento 1</a>
+                <a href="https://github.com/Rhuuuyyyy">Github Elemento 2</a>
+                <a href="https://github.com/AugustoNeon">Github Elemento 3</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.youtube.com/watch?v=KzHpUA9y5Ec" target="_blank" class="youtube-btn">
+                    ▶ YouTube
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+    <script src="javascript/menu responsivo.js"></script>
+    </body>
+</html>

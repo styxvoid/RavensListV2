@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Raven's List - Cadastro</title>
+    <link rel="icon" href="images/cross fate.png" type="image/x-icon" />
+    <link rel="stylesheet" href="stylesLoginCadastro.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <a href="index.html" title="Ir para a página inicial">
+                <img src="images/ravens_list.png" alt="The Raven's List Logo" class="logo-img"> 
+            </a>
+        </div>
+        <nav class="nav-links">
+        </nav>
+    </header>
+
+    <main class="login-main">
+        <section class="login-hero">
+            <div class="login-card-container">
+                <div class="login-card-content">                    
+                    <!-- Mensagens de erro/sucesso -->
+                    <div id="errorMessage" class="error-message"></div>
+                    <div id="successMessage" class="success-message"></div>
+                    
+                    <form class="login-form" id="formLogin">                                                
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" required class="login-input">
+                        
+                        <label for="senha" class="sr-only">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="Senha (mínimo 6 caracteres)" required class="login-input" minlength="6">                                                
+                        
+                        <p class="cadastro-link-text">
+                            Não possui conta? 
+                            <a href="cadastro.html" class="cadastro-link">Faça o cadastro aqui!</a>
+                        </p>
+                        
+                        <button type="submit" class="btn login-submit">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/api.js"></script>
+    <script src="js/cadastro.js"></script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+/* ============================================
+   MODAL CRUD - ESTILO GÓTICO
+   ============================================ */
+
+/* Modal Container */
+.crud-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a0000 0%, #000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 50px rgba(139, 0, 0, 0.8);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+    border-bottom: 2px solid #8b0000;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #8b0000;
+    text-shadow: 0 0 20px #8b0000;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: 2px solid #8b0000;
+    color: #8b0000;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    background: #8b0000;
+    color: #fff;
+    box-shadow: 0 0 20px #8b0000;
+    transform: rotate(90deg);
+}
+
+/* Tabs */
+.modal-tabs {
+    display: flex;
+    border-bottom: 2px solid #8b0000;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-button:hover {
+    background: rgba(139, 0, 0, 0.2);
+    color: #fff;
+}
+
+.tab-button.active {
+    background: rgba(139, 0, 0, 0.3);
+    color: #8b0000;
+    border-bottom-color: #8b0000;
+    text-shadow: 0 0 10px #8b0000;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #8b0000;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.status-ativo {
+    color: #00ff00;
+}
+
+.status-esgotado {
+    color: #ff6600;
+}
+
+.status-cancelado {
+    color: #ff0000;
+}
+
+.status-confirmado {
+    color: #00ff00;
+}
+
+.status-pendente {
+    color: #ffff00;
+}
+
+.status-usado {
+    color: #00aaff;
+}
+
+/* Lote Card */
+.lote-card {
+    background: linear-gradient(145deg, #2a0000 0%, #1a0000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+}
+
+.lote-card:hover {
+    border-color: #ff0000;
+    box-shadow: 0 5px 20px rgba(139, 0, 0, 0.5);
+    transform: translateY(-3px);
+}
+
+.lote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #8b0000;
+}
+
+.lote-header h4 {
+    color: #8b0000;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.lote-status {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.lote-info p {
+    color: #ccc;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.lote-info strong {
+    color: #fff;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #8b0000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8b0000, #ff0000);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px #8b0000;
+}
+
+.progress-text {
+    text-align: center;
+    color: #8b0000;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* Lote Actions */
+.lote-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-edit, .btn-delete, .btn-cancel, .btn-use {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background: #0066cc;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #0052a3;
+    box-shadow: 0 0 15px rgba(0, 102, 204, 0.5);
+}
+
+.btn-delete {
+    background: #cc0000;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #990000;
+    box-shadow: 0 0 15px rgba(204, 0, 0, 0.5);
+}
+
+.btn-cancel {
+    background: #ff6600;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background: #cc5200;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+.btn-use {
+    background: #00cc00;
+    color: #fff;
+}
+
+.btn-use:hover {
+    background: #009900;
+    box-shadow: 0 0 15px rgba(0, 204, 0, 0.5);
+}
+
+/* Ingresso Card */
+.ingresso-card {
+    background: linear-gradient(145deg, #2a0000 0%, #1a0000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ingresso-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #8b0000;
+}
+
+.codigo-ingresso {
+    color: #8b0000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.status-ingresso {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.ingresso-info p {
+    color: #ccc;
+    margin: 0.5rem 0;
+}
+
+.ingresso-info strong {
+    color: #fff;
+}
+
+.ingresso-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Formulário de Lote */
+#formLoteContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.form-lote-content {
+    background: linear-gradient(145deg, #1a0000 0%, #000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-lote-content h3 {
+    color: #8b0000;
+    text-shadow: 0 0 20px #8b0000;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #8b0000;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-save, .btn-close {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-save {
+    background: #8b0000;
+    color: #fff;
+}
+
+.btn-save:hover {
+    background: #ff0000;
+    box-shadow: 0 0 20px #8b0000;
+}
+
+.btn-close {
+    background: #333;
+    color: #fff;
+}
+
+.btn-close:hover {
+    background: #555;
+}
+
+.btn-add-lote {
+    width: 100%;
+    padding: 1rem;
+    background: #8b0000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+}
+
+.btn-add-lote:hover {
+    background: #ff0000;
+    box-shadow: 0 0 20px #8b0000;
+}
+
+/* Mensagens Toast */
+.message-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    z-index: 10001;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.message-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.message-sucesso {
+    background: #00aa00;
+    border: 2px solid #00ff00;
+}
+
+.message-erro {
+    background: #aa0000;
+    border: 2px solid #ff0000;
+}
+
+.message-info {
+    background: #0066aa;
+    border: 2px solid #0088ff;
+}
+
+/* Empty Message */
+.empty-message {
+    text-align: center;
+    color: #999;
+    font-size: 1.2rem;
+    padding: 3rem;
+    font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .modal-content {
+        max-height: 95vh;
+        margin: 1rem;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .tab-button {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .lote-actions, .ingresso-actions, .form-actions {
+        flex-direction: column;
+    }
+    
+    .message-toast {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+    }
+}

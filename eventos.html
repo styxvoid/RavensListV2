@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/cross fate.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Raven's List</title>
+
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+    <div class="logo">
+        <a href="#top">
+            <img src="images/ravens_list.png" alt="The Raven's List">
+        </a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <button class="btn btn-login">Login</button>
+        <button class="btn">Cadastro</button>
+    </div>
+</nav>
+
+<!-- Events Section -->
+    <section class="events-section" id="eventos">
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="images/bio dementia.jpg" alt="Imagem do evento Baile das Sombras" class="event-img-src">
+                </div>
+                <h3 class="event-title">Bio Dementia</h3>
+                <p class="event-location">📍 Bloodrock Bar</p>
+                <p class="event-description">
+                    Prepare-se para mergulhar na escuridão e elegância. O Bio Dementia é a festa gótica mais tradicional e intensa de Curitiba, um evento essencial para quem vive a cultura Dark. Aqui, celebramos a estética e a música gótica em uma noite de profunda imersão no underground.
+                </p>
+                <button class="btn-crud">CRUD</button>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="images/noir.jpg" alt="Imagem do evento Baile das Sombras" class="event-img-src">
+                </div>
+                <h3 class="event-title">Noir Fest</h3>
+                <p class="event-location">📍 Jokers Pub</p>
+                <p class="event-description">
+                    Esta é uma noite temática no Jokers Pub que exige elegância, mistério e atitude. Celebramos a estética atemporal do Film Noir e a cultura Dark, em um evento onde o jazz encontra o rock e a pista de dança se torna um palco de intrigas e charme.
+                <button class="btn-crud">CRUD</button>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="images/vampire.jpg" alt="Imagem do evento Baile das Sombras" class="event-img-src">
+                </div>
+            <h3 class="event-title">Vampire's Night</h3>
+            <p class="event-location">📍 Tork n' Roll</p>
+            <p class="event-description">O Vampire's Night no Tork N' Roll é a festa ideal para os amantes da cultura dark, rock, gótico e vampiresco, reunindo a comunidade em um dos maiores palcos de Curitiba. Vista-se de preto, capriche no traje de gala sombrio e venha celebrar a noite até o sol raiar.</p>
+    <button class="btn-crud">CRUD</button>
+</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>&copy; 2025 Raven's List.</p>
+                <a href="https://github.com/styxvoid">Github Elemento 1</a>
+                <a href="https://github.com/Rhuuuyyyy">Github Elemento 2</a>
+                <a href="https://github.com/AugustoNeon">Github Elemento 3</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.youtube.com/watch?v=KzHpUA9y5Ec" target="_blank" class="youtube-btn">
+                    ▶ YouTube
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+    <script src="javascript/menu responsivo.js"></script>
+    <!-- ============================================
+     MODAL CRUD - Adicionar antes do </body>
+     ============================================ -->
+
+<!-- Modal CRUD -->
+<div id="crudModal" class="crud-modal">
+    <div class="modal-content">
+        <!-- Header -->
+        <div class="modal-header">
+            <h2 id="modalTitulo">Gerenciar Evento</h2>
+            <button class="close-modal" onclick="fecharCRUD()">×</button>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="modal-tabs">
+            <button class="tab-button active" onclick="alternarAba('tabInfo')">
+                📊 Informações
+            </button>
+            <button class="tab-button" onclick="alternarAba('tabLotes')">
+                🎫 Lotes
+            </button>
+            <button class="tab-button" onclick="alternarAba('tabIngressos')">
+                💳 Ingressos Vendidos
+            </button>
+        </div>
+        
+        <!-- Tab: Informações do Evento -->
+        <div id="tabInfo" class="tab-content active">
+            <h3 style="color: #8b0000; margin-bottom: 1.5rem;">Informações do Evento</h3>
+            <div id="infoEvento">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Tab: Lotes -->
+        <div id="tabLotes" class="tab-content">
+            <h3 style="color: #8b0000; margin-bottom: 1.5rem;">Gerenciar Lotes</h3>
+            
+            <button class="btn-add-lote" onclick="mostrarFormLote()">
+                ➕ Adicionar Novo Lote
+            </button>
+            
+            <div id="listaMateriais">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Tab: Ingressos Vendidos -->
+        <div id="tabIngressos" class="tab-content">
+            <h3 style="color: #8b0000; margin-bottom: 1.5rem;">Ingressos Vendidos</h3>
+            <div id="listaIngressos">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulário de Adicionar Lote -->
+<div id="formLoteContainer">
+    <div class="form-lote-content">
+        <h3>🎫 Adicionar Novo Lote</h3>
+        
+        <form id="formLote" onsubmit="salvarLote(event)">
+            <div class="form-group">
+                <label for="nome_lote">Nome do Lote *</label>
+                <input 
+                    type="text" 
+                    id="nome_lote" 
+                    name="nome_lote" 
+                    placeholder="Ex: 1º Lote - Early Bird" 
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="quantidade_total">Quantidade Total *</label>
+                <input 
+                    type="number" 
+                    id="quantidade_total" 
+                    name="quantidade_total" 
+                    placeholder="Ex: 100" 
+                    min="1"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="preco_inteira">Preço Inteira (R$) *</label>
+                <input 
+                    type="number" 
+                    id="preco_inteira" 
+                    name="preco_inteira" 
+                    placeholder="Ex: 80.00" 
+                    step="0.01"
+                    min="0"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="preco_meia">Preço Meia (R$) *</label>
+                <input 
+                    type="number" 
+                    id="preco_meia" 
+                    name="preco_meia" 
+                    placeholder="Ex: 40.00" 
+                    step="0.01"
+                    min="0"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="data_inicio">Data de Início *</label>
+                <input 
+                    type="datetime-local" 
+                    id="data_inicio" 
+                    name="data_inicio" 
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="data_fim">Data de Término *</label>
+                <input 
+                    type="datetime-local" 
+                    id="data_fim" 
+                    name="data_fim" 
+                    required
+                >
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-save">💾 Salvar Lote</button>
+                <button type="button" class="btn-close" onclick="fecharFormLote()">❌ Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Links para os arquivos CSS e JS -->
+<link rel="stylesheet" href="crudModal.css">
+<script src="javascript/crudEventos.js"></script>
+    </body>
+</html>

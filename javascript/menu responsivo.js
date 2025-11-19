@@ -131,24 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', highlightNavigation);
 
     // ============================================
-    // BOTÕES DE COMPRA - PLACEHOLDER
-    // ============================================
-    const buyButtons = document.querySelectorAll('.btn-buy');
-    
-    buyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const eventCard = this.closest('.event-card');
-            const eventTitle = eventCard.querySelector('.event-title').textContent;
-            
-            // Aqui você pode adicionar a lógica real de compra
-            alert(`🦇 Redirecionando para compra de:\n"${eventTitle}"\n\nEm breve, sistema de pagamento estará disponível!`);
-            
-            // Exemplo de como você poderia redirecionar:
-            // window.location.href = 'checkout.html?event=' + encodeURIComponent(eventTitle);
-        });
-    });
-
-    // ============================================
     // BOTÕES LOGIN E CADASTRO - PLACEHOLDER
     // ============================================
     const loginBtn = document.querySelector('.btn-login');

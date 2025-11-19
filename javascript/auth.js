@@ -25,7 +25,7 @@ class Auth {
     logout() {
         localStorage.removeItem('usuario');
         this.usuario = null;
-        window.location.href = 'index.html';
+        window.location.href = 'index.html'; 
     }
 
     // Redirecionar se não estiver logado
@@ -46,12 +46,13 @@ const auth = new Auth();
 
 /**
  * Redireciona o usuário para 'eventos.html' se for admin, ou 'index.html' caso contrário.
- * @param {string} email - O email do usuário logado.
+ * @param {string} email - O email do usuário logado/cadastrado.
  */
 function redirecionarUsuario(email) {
     const ADMIN_EMAIL = 'admin@ravenslist.com';
     
-    if (email === ADMIN_EMAIL) {
+    // Converte para minúsculas para comparação segura
+    if (email && email.toLowerCase() === ADMIN_EMAIL) {
         // Redireciona o administrador para a página de eventos/CRUD
         window.location.href = 'eventos.html';
     } else {
@@ -60,13 +61,50 @@ function redirecionarUsuario(email) {
     }
 }
 
+// ============================================
+// LÓGICA DE ATUALIZAÇÃO DA BARRA DE NAVEGAÇÃO
+// (Para a funcionalidade de "Bem-vindo, [Nome]")
+// ============================================
+
+function extractUsername(email) {
+    if (!email || typeof email !== 'string') return 'Visitante';
+    const parts = email.split('@');
+    const username = parts[0];
+    return username.charAt(0).toUpperCase() + username.slice(1);
+}
+
+function updateNavButtons() {
+    const unloggedDiv = document.getElementById('auth-buttons-unlogged');
+    const loggedDiv = document.getElementById('auth-info-logged');
+    const welcomeSpan = document.getElementById('welcome-message');
+    
+    // Aborta se os elementos não existirem na página (Ex: páginas sem Navbar completa)
+    if (!unloggedDiv || !loggedDiv || !welcomeSpan) {
+        return; 
+    }
+
+    if (auth.estaLogado()) {
+        const usuario = auth.getUsuarioLogado();
+        // Acesso seguro ao email do usuário logado
+        const username = extractUsername(usuario.email); 
+
+        welcomeSpan.textContent = `Olá, ${username}! 🦇`;
+        
+        unloggedDiv.style.display = 'none';
+        loggedDiv.style.display = 'flex'; 
+    } else {
+        unloggedDiv.style.display = 'flex';
+        loggedDiv.style.display = 'none';
+    }
+}
 
 // ============================================
-// FORMULÁRIO DE CADASTRO
+// INICIALIZAÇÃO E MANIPULADORES DE EVENTOS
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    const formCadastro = document.getElementById('formCadastro');
     
+    // --- 1. MANIPULADOR DE CADASTRO ---
+    const formCadastro = document.getElementById('formCadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -85,14 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // Enviar para PHP
             const resultado = await api.cadastrar(nome, email, senha);
             
             if (resultado.success) {
-                alert('🦇 ' + resultado.message + ' Fazendo login...');
-                
-                // NO CADASTRO: Se o backend não retornar o usuário, podemos simular o login
-                // e redirecionar. Assumindo que o cadastro implica em login automático:
+                alert('🦇 ' + resultado.message + ' Redirecionando...');
                 
                 // Redireciona usando a lógica condicional
                 redirecionarUsuario(email);
@@ -102,14 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
-// ============================================
-// FORMULÁRIO DE LOGIN
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
+    // --- 2. MANIPULADOR DE LOGIN ---
     const formLogin = document.getElementById('formLogin');
-    
     if (formLogin) {
         formLogin.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -117,22 +146,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const senha = document.getElementById('senha').value;
             
-            // Enviar para PHP
             const resultado = await api.login(email, senha);
             
-            if (resultado.success) {
-                // Salvar usuário logado
+            iif (resultado.success) {
                 auth.salvarUsuario(resultado.usuario);
-                
                 alert('🦇 ' + resultado.message);
                 
                 // Redireciona usando a lógica condicional
-                redirecionarUsuario(email);
+                redirecionarUsuario(resultado.usuario.email); 
 
             } else {
                 alert('❌ ' + resultado.message);
             }
         });
     }
-    // ... (restante do código DOMContentLoaded para a UI da Navbar)
+
+    // --- 3. INICIALIZAÇÃO DA BARRA DE NAVEGAÇÃO E LOGOUT ---
+    updateNavButtons();
+
+    const logoutBtn = document.getElementById('logout-button');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            auth.logout();
+        });
+    }
 });

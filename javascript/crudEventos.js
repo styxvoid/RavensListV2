@@ -1,9 +1,7 @@
 // ============================================
-// CRUD DE EVENTOS - RAVEN'S LIST
-// Sistema completo de gerenciamento de ingressos
+// CRUD DE EVENTOS - CORRIGIDO E FUNCIONAL
 // ============================================
 
-// Variável global para armazenar o evento atual
 let eventoAtual = null;
 
 // ============================================
@@ -15,8 +13,8 @@ function abrirCRUD(eventoId) {
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     
-    // Carregar dados do evento
     carregarDadosEvento(eventoId);
+    carregarLotes(eventoId);
     carregarIngressosVendidos(eventoId);
 }
 
@@ -41,10 +39,8 @@ async function carregarDadosEvento(eventoId) {
         if (data.success) {
             const evento = data.evento;
             
-            // Atualizar título do modal
             document.getElementById('modalTitulo').textContent = evento.titulo;
             
-            // Atualizar informações do evento
             document.getElementById('infoEvento').innerHTML = `
                 <div class="info-grid">
                     <div class="info-item">
@@ -57,7 +53,7 @@ async function carregarDadosEvento(eventoId) {
                     </div>
                     <div class="info-item">
                         <span class="info-label">🏙️ Cidade:</span>
-                        <span class="info-value">${evento.cidade} - ${evento.estado}</span>
+                        <span class="info-value">${evento.cidade || 'N/A'} - ${evento.estado || 'N/A'}</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">👥 Capacidade:</span>
@@ -81,9 +77,6 @@ async function carregarDadosEvento(eventoId) {
                     </div>
                 </div>
             `;
-            
-            // Carregar lotes
-            carregarLotes(eventoId);
         } else {
             mostrarMensagem(data.message, 'erro');
         }
@@ -105,6 +98,11 @@ async function carregarLotes(eventoId) {
             const lotesContainer = document.getElementById('listaMateriais');
             lotesContainer.innerHTML = '';
             
+            if (data.lotes.length === 0) {
+                lotesContainer.innerHTML = '<p class="empty-message">Nenhum lote cadastrado ainda</p>';
+                return;
+            }
+            
             data.lotes.forEach(lote => {
                 const loteCard = document.createElement('div');
                 loteCard.className = 'lote-card';
@@ -125,7 +123,6 @@ async function carregarLotes(eventoId) {
                         <p class="progress-text">${((lote.quantidade_vendida / lote.quantidade_total * 100).toFixed(1))}% vendido</p>
                     </div>
                     <div class="lote-actions">
-                        <button onclick="editarLote(${lote.id})" class="btn-edit">✏️ Editar</button>
                         <button onclick="excluirLote(${lote.id})" class="btn-delete">🗑️ Excluir</button>
                     </div>
                 `;
@@ -191,7 +188,7 @@ async function carregarIngressosVendidos(eventoId) {
 // ADICIONAR NOVO LOTE
 // ============================================
 function mostrarFormLote() {
-    document.getElementById('formLoteContainer').style.display = 'block';
+    document.getElementById('formLoteContainer').style.display = 'flex';
 }
 
 function fecharFormLote() {
@@ -226,14 +223,6 @@ async function salvarLote(event) {
         console.error('Erro ao salvar lote:', error);
         mostrarMensagem('Erro ao salvar lote', 'erro');
     }
-}
-
-// ============================================
-// EDITAR LOTE
-// ============================================
-async function editarLote(loteId) {
-    // Implementar modal de edição
-    mostrarMensagem('Funcionalidade de edição em desenvolvimento', 'info');
 }
 
 // ============================================
@@ -333,7 +322,6 @@ async function marcarComoUsado(ingressoId) {
 // ============================================
 // FUNÇÕES AUXILIARES
 // ============================================
-
 function formatarData(dataStr) {
     const data = new Date(dataStr);
     return data.toLocaleDateString('pt-BR', { 
@@ -375,6 +363,7 @@ function formatarFormaPagamento(forma) {
 }
 
 function calcularOcupacao(vendidos, total) {
+    if (total === 0) return 0;
     return ((vendidos / total) * 100).toFixed(1);
 }
 
@@ -401,7 +390,6 @@ function mostrarMensagem(mensagem, tipo) {
 // ALTERNAR ENTRE ABAS
 // ============================================
 function alternarAba(aba) {
-    // Remover classe active de todas as abas
     document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -410,7 +398,6 @@ function alternarAba(aba) {
         content.classList.remove('active');
     });
     
-    // Adicionar classe active na aba clicada
     event.target.classList.add('active');
     document.getElementById(aba).classList.add('active');
 }
@@ -422,17 +409,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adicionar evento de click nos botões CRUD
     document.querySelectorAll('.btn-crud').forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            abrirCRUD(index + 1); // IDs dos eventos: 1, 2, 3
+            abrirCRUD(index + 1);
         });
     });
     
-    // Fechar modal ao clicar no X ou fora
-    document.addEventListener('click', (e) => {
-        const modal = document.getElementById('crudModal');
-        if (e.target === modal || e.target.classList.contains('close-modal')) {
-            fecharCRUD();
-        }
-    });
+    // Fechar modal ao clicar no X
+    const closeBtn = document.querySelector('.close-modal');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', fecharCRUD);
+    }
     
     console.log('🦇 Sistema CRUD de eventos carregado!');
 });

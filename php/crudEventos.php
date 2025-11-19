@@ -1,10 +1,9 @@
 <?php
 // ============================================
-// CRUD DE EVENTOS - BACKEND PHP
-// Raven's List - Sistema de Gerenciamento
+// CRUD DE EVENTOS - BACKEND PHP CORRIGIDO
 // ============================================
 
-require_once '<php>config.php';
+require_once 'config.php';
 
 // Obter ação
 $acao = $_GET['acao'] ?? $_POST['acao'] ?? '';
@@ -16,9 +15,7 @@ if ($acao === 'buscar') {
     $evento_id = $_GET['id'] ?? 0;
     
     try {
-        $stmt = $pdo->prepare("
-            SELECT * FROM eventos WHERE id = ?
-        ");
+        $stmt = $pdo->prepare("SELECT * FROM eventos WHERE id = ?");
         $stmt->execute([$evento_id]);
         $evento = $stmt->fetch();
         
@@ -136,28 +133,16 @@ else if ($acao === 'adicionar_lote') {
         // Inserir lote
         $stmt = $pdo->prepare("
             INSERT INTO lotes (
-                evento_id, 
-                nome_lote, 
-                numero_lote, 
-                quantidade_total, 
-                quantidade_disponivel,
-                preco_inteira, 
-                preco_meia, 
-                data_inicio, 
-                data_fim
+                evento_id, nome_lote, numero_lote, quantidade_total, 
+                quantidade_disponivel, preco_inteira, preco_meia, 
+                data_inicio, data_fim
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         
         $stmt->execute([
-            $evento_id,
-            $nome_lote,
-            $numero_lote,
-            $quantidade_total,
-            $quantidade_total, // disponível = total no início
-            $preco_inteira,
-            $preco_meia,
-            $data_inicio,
-            $data_fim
+            $evento_id, $nome_lote, $numero_lote, $quantidade_total,
+            $quantidade_total, $preco_inteira, $preco_meia,
+            $data_inicio, $data_fim
         ]);
         
         // Atualizar capacidade do evento
@@ -209,6 +194,14 @@ else if ($acao === 'excluir_lote') {
         $stmt->execute([$lote_id]);
         $lote = $stmt->fetch();
         
+        if (!$lote) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Lote não encontrado'
+            ]);
+            exit;
+        }
+        
         // Excluir lote
         $stmt = $pdo->prepare("DELETE FROM lotes WHERE id = ?");
         $stmt->execute([$lote_id]);
@@ -240,6 +233,19 @@ else if ($acao === 'cancelar_ingresso') {
     $ingresso_id = $_POST['ingresso_id'] ?? 0;
     
     try {
+        // Buscar dados do ingresso
+        $stmt = $pdo->prepare("SELECT * FROM ingressos WHERE id = ?");
+        $stmt->execute([$ingresso_id]);
+        $ingresso = $stmt->fetch();
+        
+        if (!$ingresso) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ingresso não encontrado'
+            ]);
+            exit;
+        }
+        
         // Atualizar status do ingresso
         $stmt = $pdo->prepare("
             UPDATE ingressos 

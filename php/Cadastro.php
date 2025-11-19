@@ -38,7 +38,7 @@ if ($stmt->rowCount() > 0) {
     exit;
 }
 
-// Hash da senha (NUNCA salvar senha em texto puro!)
+// Hash da senha
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
 // Inserir no banco
@@ -49,7 +49,8 @@ try {
     echo json_encode([
         'success' => true,
         'message' => 'Cadastro realizado com sucesso!',
-        'usuario_id' => $pdo->lastInsertId()
+        'usuario_id' => $pdo->lastInsertId(),
+        'email' => $email // Necessário para redirecionamento
     ]);
 } catch (PDOException $e) {
     echo json_encode([

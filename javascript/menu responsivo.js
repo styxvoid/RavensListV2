@@ -130,6 +130,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Executar ao fazer scroll
     window.addEventListener('scroll', highlightNavigation);
 
+// ============================================
+// BOTÕES DE COMPRA - PLACEHOLDER (CORRIGIDO)
+// ============================================
+
+// Seleciona os botões de compra que estão DENTRO do 2º card de evento (.event-card:nth-child(2)) 
+// e dos cards seguintes (n+2), EXCLUINDO o 1º card.
+const buyButtons = document.querySelectorAll('.event-card:nth-child(n+2) .btn-buy');
+
+buyButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const eventCard = this.closest('.event-card');
+        
+        // Verifica se eventCard foi encontrado antes de tentar ler o título
+        if (eventCard) { 
+            const eventTitle = eventCard.querySelector('.event-title').textContent;
+            
+            alert(`🦇 Redirecionando para compra de:\n"${eventTitle}"\n\nEm breve, sistema de pagamento estará disponível!`);
+            
+        }
+    });
+});
     // ============================================
     // BOTÕES LOGIN E CADASTRO - PLACEHOLDER
     // ============================================

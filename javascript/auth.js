@@ -148,8 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const resultado = await api.login(email, senha);
             
-            iif (resultado.success) {
+            if (resultado.success) {
+                // Salvar usuário logado, que contém o email necessário para o redirecionamento
                 auth.salvarUsuario(resultado.usuario);
+                
                 alert('🦇 ' + resultado.message);
                 
                 // Redireciona usando a lógica condicional

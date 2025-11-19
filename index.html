@@ -22,13 +22,24 @@
         <span></span>
     </div>
     <div class="nav-links" id="navLinks">
-        <a href="eventos.html">Eventos</a>
+    <a href="eventos.html">Eventos</a> 
+    
+    <div id="auth-buttons-unlogged">
         <a href="login.html">
-        <button class="btn btn-login">Login</button>
+            <button class="btn btn-login">Login</button>
         </a>
         <a href="cadastro.html">
-        <button class="btn">Cadastro</button>
+            <button class="btn">Cadastro</button>
         </a>
+    </div>
+    
+    <div id="auth-info-logged" style="display: none;">
+        <span id="welcome-message" class="nav-welcome"></span>
+        <button id="logout-button" class="btn btn-logout">Sair da Conta</button>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
     </div>
 </nav>
 

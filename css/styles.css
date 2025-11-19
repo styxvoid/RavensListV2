@@ -547,3 +547,61 @@ footer {
         font-size: 2.5rem;
     }
 }
+
+/* ============================================ */
+/* ESTILOS DE AUTENTICAÇÃO PÓS-LOGIN (Navbar)  */
+/* ============================================ */
+
+/* Estilos de layout para os contêineres de autenticação */
+#auth-info-logged,
+#auth-buttons-unlogged {
+    display: flex; 
+    align-items: center;
+    gap: 1rem; 
+}
+
+/* Mensagem de boas-vindas */
+.nav-welcome {
+    color: #f0f0f0; 
+    font-weight: 500;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); 
+    white-space: nowrap;
+}
+
+/* Estilo para o botão de Sair (Logout) */
+.btn-logout {
+    background-color: #303030;
+    border: 2px solid #8b0000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    background-color: #8b0000; 
+    border-color: #8b0000;
+    transform: scale(1.05);
+}
+
+/* Ajuste para telas menores (responsividade) */
+@media (max-width: 768px) {
+    #auth-info-logged {
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding-left: 1rem; 
+    }
+    .nav-welcome {
+        font-size: 1rem;
+        padding: 0.25rem 0;
+    }
+}

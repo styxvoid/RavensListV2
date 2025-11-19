@@ -41,6 +41,27 @@ class Auth {
 const auth = new Auth();
 
 // ============================================
+// LÓGICA DE REDIRECIONAMENTO CONDICIONAL
+// ============================================
+
+/**
+ * Redireciona o usuário para 'eventos.html' se for admin, ou 'index.html' caso contrário.
+ * @param {string} email - O email do usuário logado.
+ */
+function redirecionarUsuario(email) {
+    const ADMIN_EMAIL = 'admin@ravenslist.com';
+    
+    if (email === ADMIN_EMAIL) {
+        // Redireciona o administrador para a página de eventos/CRUD
+        window.location.href = 'eventos.html';
+    } else {
+        // Redireciona usuários normais para a página inicial
+        window.location.href = 'index.html';
+    }
+}
+
+
+// ============================================
 // FORMULÁRIO DE CADASTRO
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,17 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         formCadastro.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
             const senha = document.getElementById('senha').value;
             const confirmarSenha = document.getElementById('confirmarSenha').value;
             
-            // Validações
             if (senha !== confirmarSenha) {
                 alert('🦇 As senhas não coincidem!');
                 return;
             }
-            
             if (senha.length < 6) {
                 alert('🦇 A senha deve ter no mínimo 6 caracteres!');
                 return;
@@ -70,8 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultado = await api.cadastrar(nome, email, senha);
             
             if (resultado.success) {
-                alert('🦇 ' + resultado.message);
-                window.location.href = 'login.html';
+                alert('🦇 ' + resultado.message + ' Fazendo login...');
+                
+                // NO CADASTRO: Se o backend não retornar o usuário, podemos simular o login
+                // e redirecionar. Assumindo que o cadastro implica em login automático:
+                
+                // Redireciona usando a lógica condicional
+                redirecionarUsuario(email);
+
             } else {
                 alert('❌ ' + resultado.message);
             }
@@ -100,10 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 auth.salvarUsuario(resultado.usuario);
                 
                 alert('🦇 ' + resultado.message);
-                window.location.href = 'index.html';
+                
+                // Redireciona usando a lógica condicional
+                redirecionarUsuario(email);
+
             } else {
                 alert('❌ ' + resultado.message);
             }
         });
     }
+    // ... (restante do código DOMContentLoaded para a UI da Navbar)
 });

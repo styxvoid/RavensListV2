@@ -11,14 +11,14 @@ SELECT COUNT(*) as admin_existe FROM usuarios WHERE email = 'admin@ravenslist.co
 -- Se não existir, criar o admin
 -- Senha: admin123 (hash bcrypt)
 INSERT INTO usuarios (nome, email, senha, tipo_usuario, status, data_cadastro)
-SELECT 'Admin Raven', 'admin@ravenslist.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'ativo', NOW()
+SELECT 'Admin Raven', 'admin@ravenslist.com', '$2y$10$qG6tZaC4dPVQvWf9rTF2.ePoeaALl5h6atD2Z1Tkw5.aTpp6bWrV.', 'admin', 'ativo', NOW()
 WHERE NOT EXISTS (
     SELECT 1 FROM usuarios WHERE email = 'admin@ravenslist.com'
 );
 
 -- Atualizar senha caso o admin já exista
-UPDATE usuarios 
-SET senha = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+UPDATE usuarios
+SET senha = '$2y$10$qG6tZaC4dPVQvWf9rTF2.ePoeaALl5h6atD2Z1Tkw5.aTpp6bWrV.',
     tipo_usuario = 'admin',
     status = 'ativo'
 WHERE email = 'admin@ravenslist.com';

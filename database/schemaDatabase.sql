@@ -346,7 +346,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `telefone`, `cpf`, `data_nascimento`, `tipo_usuario`, `status`, `data_cadastro`, `ultima_atualizacao`) VALUES
-(1, 'Admin Raven', 'admin@ravenslist.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, NULL, 'admin', 'ativo', '2025-11-19 19:55:26', '2025-11-19 19:55:26'),
+(1, 'Admin Raven', 'admin@ravenslist.com', '$2y$10$qG6tZaC4dPVQvWf9rTF2.ePoeaALl5h6atD2Z1Tkw5.aTpp6bWrV.', NULL, NULL, NULL, 'admin', 'ativo', '2025-11-19 19:55:26', '2025-11-19 19:55:26'),
 (2, 'João Silva', 'joao@teste.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, NULL, 'cliente', 'ativo', '2025-11-19 19:55:26', '2025-11-19 19:55:26'),
 (3, 'Maria Santos', 'maria@teste.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, NULL, 'cliente', 'ativo', '2025-11-19 19:55:26', '2025-11-19 19:55:26'),
 (4, 'Pedro Oliveira', 'pedro@teste.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, NULL, 'cliente', 'ativo', '2025-11-19 19:55:26', '2025-11-19 19:55:26'),

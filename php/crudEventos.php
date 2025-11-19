@@ -293,6 +293,86 @@ else if ($acao === 'marcar_usado') {
 }
 
 // ============================================
+// BUSCAR ESTATÍSTICAS DE VENDAS DETALHADAS
+// ============================================
+else if ($acao === 'estatisticas_vendas') {
+    $evento_id = $_GET['evento_id'] ?? 0;
+    
+    try {
+        // Total de ingressos por tipo
+        $stmt = $pdo->prepare("
+            SELECT 
+                SUM(CASE WHEN tipo_ingresso = 'inteira' THEN quantidade ELSE 0 END) as total_inteira,
+                SUM(CASE WHEN tipo_ingresso = 'meia' THEN quantidade ELSE 0 END) as total_meia,
+                COUNT(*) as total_vendas
+            FROM ingressos 
+            WHERE evento_id = ? AND status_ingresso IN ('confirmado', 'usado')
+        ");
+        $stmt->execute([$evento_id]);
+        $tipos = $stmt->fetch();
+        
+        $total_ingressos = $tipos['total_inteira'] + $tipos['total_meia'];
+        
+        // Calcular percentuais
+        $percent_inteira = $total_ingressos > 0 ? round(($tipos['total_inteira'] / $total_ingressos) * 100, 1) : 0;
+        $percent_meia = $total_ingressos > 0 ? round(($tipos['total_meia'] / $total_ingressos) * 100, 1) : 0;
+        
+        // Vendas por forma de pagamento
+        $stmt = $pdo->prepare("
+            SELECT 
+                forma_pagamento,
+                COUNT(*) as total
+            FROM ingressos 
+            WHERE evento_id = ? AND status_ingresso IN ('confirmado', 'usado')
+            GROUP BY forma_pagamento
+        ");
+        $stmt->execute([$evento_id]);
+        $pagamentos = $stmt->fetchAll();
+        
+        $vendas_pix = 0;
+        $vendas_credito = 0;
+        $vendas_debito = 0;
+        $vendas_boleto = 0;
+        
+        foreach ($pagamentos as $pag) {
+            switch($pag['forma_pagamento']) {
+                case 'pix':
+                    $vendas_pix = $pag['total'];
+                    break;
+                case 'cartao_credito':
+                    $vendas_credito = $pag['total'];
+                    break;
+                case 'cartao_debito':
+                    $vendas_debito = $pag['total'];
+                    break;
+                case 'boleto':
+                    $vendas_boleto = $pag['total'];
+                    break;
+            }
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'estatisticas' => [
+                'total_inteira' => $tipos['total_inteira'],
+                'total_meia' => $tipos['total_meia'],
+                'percent_inteira' => $percent_inteira,
+                'percent_meia' => $percent_meia,
+                'vendas_pix' => $vendas_pix,
+                'vendas_credito' => $vendas_credito,
+                'vendas_debito' => $vendas_debito,
+                'vendas_boleto' => $vendas_boleto
+            ]
+        ]);
+    } catch (PDOException $e) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erro ao buscar estatísticas: ' . $e->getMessage()
+        ]);
+    }
+}
+
+// ============================================
 // AÇÃO INVÁLIDA
 // ============================================
 else {

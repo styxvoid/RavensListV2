@@ -1,4 +1,4 @@
-/* =================== MODAL CRUD - ESTILO GÓTICO =================== */
+/* =================== MODAL CRUD - ESTILO GÓTICO COM DASHBOARD =================== */
 
 /* Modal Container */
 .crud-modal {
@@ -129,6 +129,133 @@
     }
 }
 
+/* =================== DASHBOARD STYLES =================== */
+
+/* Dashboard Header */
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+/* Stats Grid - Cards de Estatísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, #2a0000 0%, #1a0000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(139, 0, 0, 0.6);
+    border-color: #ff0000;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.stat-label {
+    color: #999;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.stat-meta {
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
+.text-success {
+    color: #00ff00 !important;
+}
+
+.text-warning {
+    color: #ffaa00 !important;
+}
+
+.text-danger {
+    color: #ff0000 !important;
+}
+
+/* Progress Section */
+.progress-section {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #8b0000;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.progress-bar-large {
+    width: 100%;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #8b0000;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.progress-fill-large {
+    height: 100%;
+    background: linear-gradient(90deg, #8b0000, #ff0000, #ff6600);
+    transition: width 0.5s ease;
+    box-shadow: 0 0 20px #8b0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-label {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px #000;
+    z-index: 1;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Info Section */
+.info-section {
+    margin-top: 2rem;
+}
+
 /* Info Grid */
 .info-grid {
     display: grid;
@@ -182,7 +309,141 @@
     color: #00aaff;
 }
 
-/* Lote Card */
+/* Additional Stats */
+.additional-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.stat-box {
+    background: rgba(139, 0, 0, 0.2);
+    border: 1px solid #8b0000;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-box-label {
+    display: block;
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-box-value {
+    display: block;
+    color: #8b0000;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
+/* Vendas por Tipo */
+.vendas-tipo-section {
+    margin-top: 2rem;
+}
+
+.vendas-tipo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tipo-card {
+    background: linear-gradient(145deg, #2a0000 0%, #1a0000 100%);
+    border: 2px solid #8b0000;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tipo-icon {
+    font-size: 2.5rem;
+}
+
+.tipo-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tipo-label {
+    color: #999;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.tipo-value {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.tipo-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tipo-bar-fill {
+    height: 100%;
+    background: #8b0000;
+    transition: width 0.5s ease;
+}
+
+.tipo-percent {
+    color: #8b0000;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Pagamento Grid */
+.pagamento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.pagamento-item {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #8b0000;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagamento-icon {
+    font-size: 2rem;
+}
+
+.pagamento-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagamento-label {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.pagamento-value {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* =================== LOTE CARDS =================== */
+
 .lote-card {
     background: linear-gradient(145deg, #2a0000 0%, #1a0000 100%);
     border: 2px solid #8b0000;
@@ -535,6 +796,10 @@
         font-size: 1.5rem;
     }
     
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .info-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -553,5 +818,14 @@
         right: 10px;
         left: 10px;
         top: 10px;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .vendas-tipo-grid,
+    .pagamento-grid {
+        grid-template-columns: 1fr;
     }
 }

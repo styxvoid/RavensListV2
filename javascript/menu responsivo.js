@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
-            alert('🦇 Página de Login em desenvolvimento!\n\nEm breve você poderá acessar sua conta.');
+            alert('🦇 "Denn die Todten reiten Schnell."\n\n- Gottfried August Bürger');
             // window.location.href = 'login.html';
         });
     }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cadastroBtn.forEach(btn => {
         if (btn.textContent.trim() === 'Cadastro') {
             btn.addEventListener('click', function() {
-                alert('🦇 Página de Cadastro em desenvolvimento!\n\nEm breve você poderá criar sua conta.');
+                alert('🦇 Abandonai toda esperança vós que entrai');
                 // window.location.href = 'cadastro.html';
             });
         }
